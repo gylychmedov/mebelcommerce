@@ -1,9 +1,10 @@
+import HomeSlider from "../components/Sliders/HomeSlider";
 import View from "../Layouts/View";
 
 const Home = () => {
   return (
     <View>
-      <main className="bg-red-400">Hello world</main>
+      <HomeSlider />
     </View>
   );
 };

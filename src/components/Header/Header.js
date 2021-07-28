@@ -4,7 +4,9 @@ const Header = () => {
   return (
     <nav>
       <div className="flex justify-between items-center mt-3">
-        <img src="/logo.png" alt="logo" className="w-24" />
+        <div className="p-5 w-24">
+          <img src="/logo.png" alt="logo" className="w-full" />
+        </div>
         <Search />
         <aside className="flex">
           <div className="flex flex-col items-center mx-2">

@@ -4,4 +4,12 @@
 
 * {
   outline: none;
+  font-family: Poppins;
+  user-select: none;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url("./fonts/Poppins-Light.ttf");
+  font-display: wrap;
 }
