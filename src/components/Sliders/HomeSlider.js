@@ -2,6 +2,7 @@ import { useRef } from "react";
 import SwiperCore, { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FcNext, FcPrevious } from "react-icons/fc";
+import Image from "next/image";
 
 const HomeSlider = () => {
   const nextSlide = useRef(null);
@@ -33,14 +34,18 @@ const HomeSlider = () => {
         </div>
 
         <SwiperSlide>
-          <img
+          <Image
+            width="1180"
+            height="470"
             src="/sliders/1.jpg"
             alt="slider"
             className="w-full rounded-lg"
           />
         </SwiperSlide>
         <SwiperSlide>
-          <img
+          <Image
+            width="1180"
+            height="470"
             src="/sliders/2.jpg"
             alt="slider"
             className="w-full rounded-lg"
