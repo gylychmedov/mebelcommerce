@@ -1,5 +1,6 @@
 import HomeAds from "../components/Ads/HomeAds";
 import HomeSlider from "../components/Sliders/HomeSlider";
+import HomeTabProducts from "../components/Tabs/HomeTabProducts";
 import View from "../Layouts/View";
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
     <View>
       <HomeSlider />
       <HomeAds />
+      <HomeTabProducts />
     </View>
   );
 };
