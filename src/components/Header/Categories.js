@@ -4,7 +4,7 @@ import CategoryMenu from "./CategoryMenu";
 const Categories = () => {
   return (
     <nav className="border-t">
-      <div className="my-5">
+      <div className="my-5 shadow-xl">
         <Swiper
           slidesPerView={3}
           spaceBetween={5}
@@ -19,30 +19,30 @@ const Categories = () => {
               slidesPerView: 8,
             },
             1200: {
-              slidesPerView: 10,
+              slidesPerView: 9,
             },
             1400: {
-              slidesPerView: 12,
+              slidesPerView: 10,
             },
           }}
         >
           <SwiperSlide>
-            <CategoryMenu image="/categories/1.jpg" name="Room merge" />
+            <CategoryMenu image="/categories/1.jpg" name="Dining room" />
           </SwiperSlide>
           <SwiperSlide>
-            <CategoryMenu image="/categories/2.jpg" name="Big data" />
+            <CategoryMenu image="/categories/2.jpg" name="Bedrom" />
           </SwiperSlide>
           <SwiperSlide>
-            <CategoryMenu image="/categories/3.jpg" name="Toyota Corollo" />
+            <CategoryMenu image="/categories/3.jpg" name="Living room" />
           </SwiperSlide>
           <SwiperSlide>
-            <CategoryMenu image="/categories/4.jpg" name="Mercedes benz" />
+            <CategoryMenu image="/categories/4.jpg" name="Teen room" />
           </SwiperSlide>
           <SwiperSlide>
-            <CategoryMenu image="/categories/1.jpg" name="Room merge" />
+            <CategoryMenu image="/categories/1.jpg" name="Corner sets" />
           </SwiperSlide>
           <SwiperSlide>
-            <CategoryMenu image="/categories/2.jpg" name="Big data" />
+            <CategoryMenu image="/categories/2.jpg" name="Bed & Bedrom set" />
           </SwiperSlide>
           <SwiperSlide>
             <CategoryMenu image="/categories/3.jpg" name="Toyota Corollo" />

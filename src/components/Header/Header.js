@@ -34,7 +34,7 @@ const Header = () => {
             <span>
               <ImLocation2 size="28" color="#313131" />
             </span>
-            <span>Text</span>
+            <span>Our stories</span>
           </div>
         </aside>
       </div>
