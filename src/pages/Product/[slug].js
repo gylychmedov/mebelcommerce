@@ -72,7 +72,9 @@ const ProductDetail = () => {
             />
           </div>
         </section>
-        <section className="col-span-12 lg:col-span-4 bg-red-600"></section>
+        <section className="col-span-12 lg:col-span-4 flex flex-col bg-red-600">
+          <div className="font-bold">Perge Berjer</div>
+        </section>
       </main>
     </View>
   );

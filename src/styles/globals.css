@@ -13,3 +13,13 @@
   src: url("./fonts/Poppins-Light.ttf");
   font-display: wrap;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #adadad6e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #adadad;
+  border-radius: 10px;
+}
