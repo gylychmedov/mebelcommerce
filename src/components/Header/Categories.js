@@ -4,7 +4,7 @@ import CategoryMenu from "./CategoryMenu";
 const Categories = () => {
   return (
     <nav className="border-t">
-      <div className="my-5 shadow-xl">
+      <div className="my-5 border-b">
         <Swiper
           slidesPerView={3}
           spaceBetween={5}

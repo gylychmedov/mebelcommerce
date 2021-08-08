@@ -8,7 +8,7 @@ const View = (props) => {
       <Head>
         <title>Ider mebel site</title>
       </Head>
-      <main className="xl:px-56">
+      <main className="px-3 xl:px-56">
         <Navbar />
         {children}
       </main>

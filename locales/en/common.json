@@ -1,0 +1,9 @@
+{
+    "home" : "Home", 
+    "categories" : "Categories",
+    "product" : "Product",
+    "newProducts" : "New products",
+    "newProduct" : "New product",
+    "discount" : "{{percent}}% discount", 
+    "view" : "View"
+}
