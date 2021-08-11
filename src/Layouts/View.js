@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 
 const View = (props) => {
@@ -12,6 +13,7 @@ const View = (props) => {
         <Navbar />
         {children}
       </main>
+      <Footer />
     </>
   );
 };

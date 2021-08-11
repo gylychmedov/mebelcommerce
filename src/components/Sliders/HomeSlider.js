@@ -38,8 +38,8 @@ const HomeSlider = () => {
 
         <SwiperSlide>
           <Image
-            width="1180"
-            height="470"
+            width="1600"
+            height="600"
             src="/sliders/1.jpg"
             alt="slider"
             className="w-full rounded-lg"
@@ -47,8 +47,8 @@ const HomeSlider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <Image
-            width="1180"
-            height="470"
+            width="1600"
+            height="600"
             src="/sliders/2.jpg"
             alt="slider"
             className="w-full rounded-lg"
