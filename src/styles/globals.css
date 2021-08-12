@@ -125,3 +125,34 @@ ul li span {
   justify-content: center;
   text-shadow: 0 0 30px #111;
 }
+
+/* nav end */
+
+/* img zoom star */
+.img-zoom-container {
+  position: relative;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: transparent;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  width: 400px;
+  height: 500px;
+  visibility: hidden;
+}
+
+.img-zoom-container:hover > .img-zoom-result {
+  visibility: visible;
+}
+
+.img-zoom-container:hover > .img-zoom-lens {
+  background: rgba(47, 77, 116, 0.205);
+}
+
+/* image zoom end */

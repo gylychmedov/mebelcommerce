@@ -1056,7 +1056,7 @@ const Categories = () => {
     //   </div>
     // </nav>
 
-    <aside className="navbar px-2 lg:px-16 xl:px-56">
+    <aside className="navbar">
       <nav>
         {categories &&
           categories.map((cat) => {
@@ -1067,7 +1067,7 @@ const Categories = () => {
                     {route.locale == "ru" ? cat.name_ru : cat.name_tm}
                   </div>
                   <ul className="text-left">
-                    <div className="grid grid-cols-12 p-2 lg:px-16 xl:px-56">
+                    <div className="grid grid-cols-12 pt-2 border-b">
                       <div
                         // content-between
                         className="col-span-12 flex flex-col overflow-y-auto max-h-96 flex-wrap "

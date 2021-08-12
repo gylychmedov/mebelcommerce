@@ -2,59 +2,65 @@ import { useRef } from "react";
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FcNext, FcPrevious } from "react-icons/fc";
-import Image from "next/image";
+import Link from "next/link";
 
-const HomeSlider = () => {
+const HomeSlider = ({ data }) => {
   const nextSlide = useRef(null);
   const prevSlide = useRef(null);
   SwiperCore.use([Autoplay, Navigation, Pagination]);
   return (
     <section>
-      <Swiper
-        autoplay={{ delay: 3000 }}
-        spaceBetween={5}
-        className="relative"
-        pagination={{
-          clickable: true,
-        }}
-        loop={true}
-        onInit={(swiper) => {
-          swiper.params.navigation.nextEl = nextSlide.current;
-          swiper.params.navigation.prevEl = prevSlide.current;
-        }}
-      >
-        <div
-          ref={nextSlide}
-          className="cursor-pointer transform -translate-y-2/4 rounded-lg p-3 absolute top-2/4  right-5 z-10"
+      {data && (
+        <Swiper
+          autoplay={{ delay: 3000 }}
+          spaceBetween={5}
+          className="relative"
+          pagination={{
+            clickable: true,
+          }}
+          loop={true}
+          onInit={(swiper) => {
+            swiper.params.navigation.nextEl = nextSlide.current;
+            swiper.params.navigation.prevEl = prevSlide.current;
+          }}
         >
-          <FcNext size={36} />
-        </div>
-        <div
-          ref={prevSlide}
-          className="cursor-pointer transform -translate-y-2/4 rounded-lg p-3 absolute top-2/4  left-5 z-10"
-        >
-          <FcPrevious size={36} />
-        </div>
-
-        <SwiperSlide>
-          <Image
-            width="1600"
-            height="600"
-            src="/sliders/1.jpg"
-            alt="slider"
-            className="w-full rounded-lg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            width="1600"
-            height="600"
-            src="/sliders/2.jpg"
-            alt="slider"
-            className="w-full rounded-lg"
-          />
-        </SwiperSlide>
-      </Swiper>
+          <div
+            ref={nextSlide}
+            className="cursor-pointer transform -translate-y-2/4 rounded-lg p-3 absolute top-2/4  right-5 z-10"
+          >
+            <FcNext size={36} />
+          </div>
+          <div
+            ref={prevSlide}
+            className="cursor-pointer transform -translate-y-2/4 rounded-lg p-3 absolute top-2/4  left-5 z-10"
+          >
+            <FcPrevious size={36} />
+          </div>
+          {data?.map((slide) => {
+            return (
+              <SwiperSlide>
+                {slide.link ? (
+                  <Link href={slide.link || "/"}>
+                    <a>
+                      <img
+                        src={slide.image}
+                        alt="slider"
+                        className="w-full rounded-lg"
+                      />
+                    </a>
+                  </Link>
+                ) : (
+                  <img
+                    src={slide.image}
+                    alt="slider"
+                    className="w-full rounded-lg"
+                  />
+                )}
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      )}
     </section>
   );
 };

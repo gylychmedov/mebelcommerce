@@ -3,7 +3,7 @@
     "categories" : "Categories",
     "product" : "Product",
     "newProducts" : "New products",
-    "newProduct" : "New product",
+    "newProduct" : "New",
     "discount" : "{{percent}}% discount", 
     "view" : "View"
 }
