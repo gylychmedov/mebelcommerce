@@ -4,5 +4,18 @@
     "product" : "Product fr",
     "newProducts" : "New products fr",
     "newProduct" : "New fr",
-    "discount" : "{{percent}} discount"
+    "discount" : "{{percent}} discount",
+    "view" : "View",
+    "productCode" : "Product code fr",
+    "delivery" : "Delivery time: {{day}} day fr",
+    "setContent" : "Set Content fr",
+    "name" : "Name fr",
+    "price" : "Price fr",
+    "description" : "Description fr",
+    "total" : "Total fr",
+    "warranty" : "Warranty fr",
+    "color" : "Color fr",
+    "material" : "Material fr",
+    "size" : "Size fr",
+    "similarProducts" : "Similar Products fr"
 }

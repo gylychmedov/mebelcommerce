@@ -2,7 +2,7 @@ import { IoSearchOutline } from "react-icons/io5";
 
 const Search = () => {
   return (
-    <aside className="flex">
+    <aside className="flex w-full">
       <input
         type="text"
         placeholder="Search"

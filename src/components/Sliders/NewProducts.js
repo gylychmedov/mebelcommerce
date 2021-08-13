@@ -1,4 +1,4 @@
-import Product from "./Product";
+import Product from "../Product/Product";
 import useTranslation from "next-translate/useTranslation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";

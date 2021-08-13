@@ -9,10 +9,10 @@ const Header = () => {
       <div className="flex flex-wrap justify-between items-center mt-3">
         <Link href="/">
           <a>
-            <img src="/logo.svg" alt="logo" className="w-28  lg:w-36" />
+            <img src="/logo.svg" alt="logo" className="w-24" />
           </a>
         </Link>
-        <div>
+        <div className="w-auto">
           <Search />
         </div>
         <aside className="flex mt-3 lg:mt-0 w-full justify-between lg:w-auto">

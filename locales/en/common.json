@@ -5,5 +5,17 @@
     "newProducts" : "New products",
     "newProduct" : "New",
     "discount" : "{{percent}}% discount", 
-    "view" : "View"
+    "view" : "View",
+    "productCode" : "Product code",
+    "delivery" : "Delivery time: {{day}} day",
+    "setContent" : "Set Content",
+    "name" : "Name",
+    "price" : "Price",
+    "description" : "Description",
+    "total" : "Total",
+    "warranty" : "Warranty", 
+    "color" : "Color",
+    "material" : "Material",
+    "size" : "Size", 
+    "similarProducts" : "Similar Products"
 }
