@@ -1,5 +1,6 @@
 {
     "home" : "Home", 
+    "search" : "Search",
     "categories" : "Categories",
     "product" : "Product",
     "newProducts" : "New products",
@@ -17,5 +18,11 @@
     "color" : "Color",
     "material" : "Material",
     "size" : "Size", 
-    "similarProducts" : "Similar Products"
+    "similarProducts" : "Similar Products", 
+    "about" : "About",
+    "contact" : "Contact",
+    "stories": "Our Stories", 
+    "corporation": "Corporation",
+    "relationship" : "Customer Relationship",
+    "social" : "Social Media"
 }

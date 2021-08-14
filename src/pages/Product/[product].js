@@ -5,6 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 import { GrDeliver } from "react-icons/gr";
 import { AiOutlineInbox } from "react-icons/ai";
 import SimilarProducts from "../../components/Sliders/SimilarProducts";
+import Breadcrumb from "../../components/Header/Breadcrumb";
 
 const ProductDetail = () => {
   const data = {
@@ -106,7 +107,7 @@ const ProductDetail = () => {
   const [mainImage, setMainImage] = useState("");
 
   useEffect(() => {
-    setMainImage(data.images?.[0].link);
+    data.images && setMainImage(data.images[0].link);
   }, [route]);
 
   useEffect(() => {
@@ -168,8 +169,13 @@ const ProductDetail = () => {
   }
 
   return (
-    <View>
+    <View title={route.locale == "en" ? data.name_en : data.name_fr}>
       <main className="grid grid-cols-12 gap-3 mt-5">
+        <section className="col-span-12">
+          <Breadcrumb
+            product={data && route.locale == "en" ? data.name_en : data.name_fr}
+          />
+        </section>
         <section className="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3">
           <div className="col-span-2 flex flex-col overflow-y-auto max-h-96">
             {data.images?.map((product, key) => {
@@ -185,8 +191,13 @@ const ProductDetail = () => {
             })}
           </div>
           <div className="col-span-10">
-            <div class="img-zoom-container">
-              <img id="myimage" className="w-full" src={mainImage} />
+            <div className="img-zoom-container">
+              <img
+                id="myimage"
+                className="w-full"
+                alt="product"
+                src={mainImage}
+              />
               <div
                 id="myresult"
                 className={"img-zoom-result absolute top-0"}
@@ -244,7 +255,7 @@ const ProductDetail = () => {
           {data.inSet && data.inSet.length > 0 && (
             <div className="flex flex-col my-2 pt-4 border-t">
               <h3 className="font-bold">{t("setContent")}</h3>
-              <table class="table-fixed text-left">
+              <table className="table-fixed text-left">
                 <thead>
                   <tr>
                     <th className="w-3/12">{t("name")}</th>
@@ -254,9 +265,9 @@ const ProductDetail = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.inSet.map((inset) => {
+                  {data.inSet.map((inset, key) => {
                     return (
-                      <tr className="border-t border-gray-100">
+                      <tr className="border-t border-gray-100" key={key}>
                         <td>{inset.name}</td>
                         <td className="text-sm">{inset.description}</td>
                         <td>

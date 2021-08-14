@@ -36,9 +36,9 @@ const HomeSlider = ({ data }) => {
           >
             <FcPrevious size={36} />
           </div>
-          {data?.map((slide) => {
+          {data?.map((slide, key) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={key}>
                 {slide.link ? (
                   <Link href={slide.link || "/"}>
                     <a>

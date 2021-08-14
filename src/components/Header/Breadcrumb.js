@@ -17,7 +17,19 @@ const Breadcrumb = (props) => {
       case "Categories": {
         return category;
       }
+      case "sub": {
+        return ">";
+      }
       case "[categories]": {
+        return product;
+      }
+      case "[subcategories]": {
+        return product;
+      }
+      case "Product": {
+        return t("product");
+      }
+      case "[product]": {
         return product;
       }
     }

@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
-import View from "../../Layouts/View";
-import Product from "../../components/Product/Product";
-import Breadcrumb from "../../components/Header/Breadcrumb";
-import SubCategories from "../../components/Categories/Subcategories";
+import { useState } from "react";
+import View from "../../../Layouts/View";
+import Product from "../../../components/Product/Product";
+import Breadcrumb from "../../../components/Header/Breadcrumb";
 import useTranslation from "next-translate/useTranslation";
 import { BsFillGridFill, BsFillGrid3X3GapFill } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 const Categories = () => {
   const [grid, setGrid] = useState(2);
   const { t } = useTranslation("common");
-
+  const route = useRouter();
   return (
-    <View title={t("categories")}>
+    <View>
       <main className="flex flex-col w-full ">
-        <Breadcrumb />
-        <SubCategories />
+        <Breadcrumb product={route.query.subcategories} />
         <section className="w-full flex items-center rounded-md bg-gray-100 py-3 px-4 my-5">
           {/* grid start */}
           <div className="flex items-center">
