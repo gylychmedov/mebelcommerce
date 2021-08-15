@@ -114,8 +114,6 @@ const ProductDetail = () => {
     imageZoom("myimage", "myresult");
   }, [mainImage]);
 
-  console.log(mainImage);
-
   function imageZoom(imgID, resultID) {
     var img, lens, result, cx, cy;
     img = document.getElementById(imgID);

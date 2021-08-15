@@ -94,10 +94,22 @@ nav ul li:hover ul {
   width: 100%;
   position: absolute;
   border-top: 1px solid #eee;
-  top: 42px;
+  top: 92px;
   left: 0;
   right: 0;
   z-index: 25;
+  animation: topMenu 0.5s ease-in;
+}
+
+@keyframes topMenu {
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
 }
 
 ul li span {
