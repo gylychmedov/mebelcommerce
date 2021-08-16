@@ -12,8 +12,8 @@ const CategoryList = (props) => {
       </div>
       <main className="grid grid-cols-12 gap-4">
         {props.data &&
-          props.data.map((category) => {
-            return <Category data={category} />;
+          props.data.map((category, key) => {
+            return <Category key={key} data={category} />;
           })}
       </main>
     </main>

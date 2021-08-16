@@ -5,7 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 const Product = () => {
   const { t } = useTranslation("common");
   return (
-    <Link href="/Product/product">
+    <Link href="/Product/1">
       <a>
         <aside className="col-span-1 hover:shadow-lg flex flex-col relative transform hover:-translate-y-1 duration-1000">
           <Image
