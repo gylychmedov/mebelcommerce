@@ -2,9 +2,18 @@ import "../styles/globals.css";
 import "../styles/swiper-bundle.css";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { CategoriesProvider } from "../components/Contexts/CategoriesContext";
+import { useEffect, useState } from "react";
+import { http } from "../components/API/http";
 
 function MyApp({ Component, pageProps }) {
   const route = useRouter();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    http.get("categories").then((res) => setCategories(res.data.data));
+  }, []);
+
   return (
     <motion.div
       key={route.asPath}
@@ -19,7 +28,9 @@ function MyApp({ Component, pageProps }) {
         },
       }}
     >
-      <Component {...pageProps} />
+      <CategoriesProvider value={categories}>
+        <Component {...pageProps} />
+      </CategoriesProvider>
     </motion.div>
   );
 }

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
+import { createContext } from "react";
 
 const View = (props) => {
   const { children, title } = props;

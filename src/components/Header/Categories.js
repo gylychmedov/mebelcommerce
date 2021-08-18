@@ -1,14 +1,11 @@
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { http } from "../../components/API/http";
+import { useContext } from "react";
+import CategoriesContext from "../Contexts/CategoriesContext";
 
 const Categories = () => {
-  const [categories, setCategories] = useState([]);
+  const categories = useContext(CategoriesContext);
 
-  useEffect(() => {
-    http.get("categories").then((res) => setCategories(res.data.data));
-  }, []);
   const route = useRouter();
   return (
     <aside className="navbar">
