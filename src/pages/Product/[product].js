@@ -11,106 +11,106 @@ import { http } from "../../components/API/http";
 
 const ProductDetail = ({ error, product }) => {
   console.log(product);
-  const data = {
-    name_en: "Product name EN",
-    name_fr: "Product name fr",
-    product_code: "012345",
-    price: 350,
-    discountPrice: 320,
-    cashPrice: 300,
-    percent: 10,
-    deliveryDay: 5,
-    material: "gold",
-    color: "red",
-    warranty: "1 year",
-    size: "14x15 cm",
-    description: "Lorem ipsum big paragraph minimum 40 word",
-    inSet: [
-      {
-        id: 1,
-        name: "Stol",
-        count: 2,
-        price: 320,
-        description: "Lorem ipsum big paragraph minimum 40 word",
-      },
-      {
-        id: 2,
-        name: "Parta",
-        count: 8,
-        price: 124,
-        description: "Lorem ipsum big paragraph minimum 40 word",
-      },
-    ],
-    images: [
-      {
-        id: 1,
-        link: "/product/1.jpg",
-      },
-      {
-        id: 2,
-        link: "/product/2.jpg",
-      },
-      {
-        id: 3,
-        link: "/product/3.jpg",
-      },
-      {
-        id: 1,
-        link: "/product/1.jpg",
-      },
-      {
-        id: 2,
-        link: "/product/2.jpg",
-      },
-      {
-        id: 3,
-        link: "/product/3.jpg",
-      },
-    ],
+  // const data = {
+  //   name_en: "Product name EN",
+  //   name_fr: "Product name fr",
+  //   product_code: "012345",
+  //   price: 350,
+  //   discountPrice: 320,
+  //   cashPrice: 300,
+  //   percent: 10,
+  //   deliveryDay: 5,
+  //   material: "gold",
+  //   color: "red",
+  //   warranty: "1 year",
+  //   size: "14x15 cm",
+  //   description: "Lorem ipsum big paragraph minimum 40 word",
+  //   inSet: [
+  //     {
+  //       id: 1,
+  //       name: "Stol",
+  //       count: 2,
+  //       price: 320,
+  //       description: "Lorem ipsum big paragraph minimum 40 word",
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "Parta",
+  //       count: 8,
+  //       price: 124,
+  //       description: "Lorem ipsum big paragraph minimum 40 word",
+  //     },
+  //   ],
+  //   images: [
+  //     {
+  //       id: 1,
+  //       link: "/product/1.jpg",
+  //     },
+  //     {
+  //       id: 2,
+  //       link: "/product/2.jpg",
+  //     },
+  //     {
+  //       id: 3,
+  //       link: "/product/3.jpg",
+  //     },
+  //     {
+  //       id: 1,
+  //       link: "/product/1.jpg",
+  //     },
+  //     {
+  //       id: 2,
+  //       link: "/product/2.jpg",
+  //     },
+  //     {
+  //       id: 3,
+  //       link: "/product/3.jpg",
+  //     },
+  //   ],
 
-    similarProduct: [
-      {
-        id: 1,
-        name_en: "Product name EN",
-        name_fr: "Product name fr",
-        slug: "http://slug.ru/slug",
-        image: "http://link.ru",
-        price: 350,
-        discountPrice: 320,
-        newProduct: true,
-        percent: 10,
-      },
-      {
-        id: 2,
-        name_en: "Product name EN",
-        name_fr: "Product name fr",
-        slug: "http://slug.ru/slug",
-        image: "http://link.ru",
-        price: 350,
-        discountPrice: 320,
-        newProduct: false,
-        percent: 10,
-      },
-      {
-        id: 3,
-        name_en: "Product name EN",
-        name_fr: "Product name fr",
-        slug: "http://slug.ru/slug",
-        image: "http://link.ru",
-        price: 350,
-        discountPrice: 320,
-        newProduct: true,
-        percent: 10,
-      },
-    ],
-  };
+  //   similarProduct: [
+  //     {
+  //       id: 1,
+  //       name_en: "Product name EN",
+  //       name_fr: "Product name fr",
+  //       slug: "http://slug.ru/slug",
+  //       image: "http://link.ru",
+  //       price: 350,
+  //       discountPrice: 320,
+  //       newProduct: true,
+  //       percent: 10,
+  //     },
+  //     {
+  //       id: 2,
+  //       name_en: "Product name EN",
+  //       name_fr: "Product name fr",
+  //       slug: "http://slug.ru/slug",
+  //       image: "http://link.ru",
+  //       price: 350,
+  //       discountPrice: 320,
+  //       newProduct: false,
+  //       percent: 10,
+  //     },
+  //     {
+  //       id: 3,
+  //       name_en: "Product name EN",
+  //       name_fr: "Product name fr",
+  //       slug: "http://slug.ru/slug",
+  //       image: "http://link.ru",
+  //       price: 350,
+  //       discountPrice: 320,
+  //       newProduct: true,
+  //       percent: 10,
+  //     },
+  //   ],
+  // };
 
   const route = useRouter();
   const { t } = useTranslation("common");
   const [mainImage, setMainImage] = useState("");
 
   useEffect(() => {
-    data.images && setMainImage(data.images[0].link);
+    product.images && setMainImage(product.images[0].image);
   }, [route]);
 
   useEffect(() => {
@@ -186,14 +186,18 @@ const ProductDetail = ({ error, product }) => {
           </section>
           <section className="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3">
             <div className="col-span-2 flex flex-col overflow-y-auto max-h-96">
-              {data.images?.map((product, key) => {
+              {product.images?.map((product, key) => {
                 return (
                   <div
                     key={key}
                     className="mb-2"
-                    onClick={() => setMainImage(product.link)}
+                    onClick={() => setMainImage(product.image)}
                   >
-                    <img className="rounded" src={product.link} alt="Product" />
+                    <img
+                      className="rounded"
+                      src={product.image}
+                      alt="Product"
+                    />
                   </div>
                 );
               })}
@@ -260,7 +264,7 @@ const ProductDetail = ({ error, product }) => {
               </div>
             )}
 
-            {data.inSet && data.inSet.length > 0 && (
+            {product.include && product.include.length > 0 && (
               <div className="flex flex-col my-2 pt-4 border-t">
                 <h3 className="font-bold">{t("setContent")}</h3>
                 <table className="table-fixed text-left">
@@ -273,17 +277,18 @@ const ProductDetail = ({ error, product }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.inSet.map((inset, key) => {
+                    {product.include.map((include, key) => {
                       return (
                         <tr className="border-t border-gray-100" key={key}>
-                          <td>{inset.name}</td>
-                          <td className="text-sm">{inset.description}</td>
+                          <td>{include.name}</td>
+                          <td className="text-sm">{include.description}</td>
                           <td>
                             <span className="flex items-center">
-                              <AiOutlineInbox className="mr-1" /> {inset.count}
+                              <AiOutlineInbox className="mr-1" />{" "}
+                              {include.count}
                             </span>
                           </td>
-                          <td>${inset.price}</td>
+                          <td>${include.price}</td>
                         </tr>
                       );
                     })}
@@ -293,11 +298,11 @@ const ProductDetail = ({ error, product }) => {
             )}
           </section>
           <section className="col-span-12 grid grid-cols-12 gap-4 xl:gap-8 my-5">
-            {data.warranty && (
+            {product.warranty && (
               <aside className="bg-green-50 hover:shadow-lg hover:-translate-y-1  hover:bg-green-200 duration-500 transform hover:scale-105 rounded-lg ring-1 ring-green-200 items-center justify-center flex flex-col col-span-6 md:col-span-3 py-10">
                 <h4 className="text-lg">{t("warranty")}</h4>
                 <div className="text-green-700 hover:text-green-900 text-2xl uppercase font-black mt-3">
-                  {Object.values(product.warranty)}
+                  {product.warranty}
                 </div>
               </aside>
             )}
@@ -337,7 +342,7 @@ const ProductDetail = ({ error, product }) => {
           </section>
 
           <section className="col-span-12">
-            <SimilarProducts data={data.similarProduct} />
+            <SimilarProducts data={product.similarProduct} />
           </section>
         </main>
       )}

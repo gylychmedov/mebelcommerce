@@ -13,7 +13,7 @@ const Home = (props) => {
       ) : (
         <>
           <HomeSlider data={props.sliders} />
-          <NewProducts />
+          <NewProducts data={props.products} />
           <CategoryList data={props.categories} />
         </>
       )}
@@ -25,10 +25,12 @@ export const getServerSideProps = async () => {
   try {
     const sliders = await http.get("sliders");
     const categories = await http.get("categories");
+    const NewProducts = await http.get("products/new");
     return {
       props: {
         sliders: sliders.data.data,
         categories: categories.data.data,
+        products: NewProducts.data.data,
         error: false,
       },
     };

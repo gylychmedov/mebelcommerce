@@ -9,9 +9,11 @@ import { http } from "../components/API/http";
 function MyApp({ Component, pageProps }) {
   const route = useRouter();
   const [categories, setCategories] = useState([]);
+  // const [contact, setContact] = useState([]);
 
   useEffect(() => {
     http.get("categories").then((res) => setCategories(res.data.data));
+    // http.get("contact").then((res) => setContact(res.data.data));
   }, []);
 
   return (

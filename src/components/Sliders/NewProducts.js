@@ -3,10 +3,9 @@ import useTranslation from "next-translate/useTranslation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 
-const NewProducts = () => {
+const NewProducts = ({ data }) => {
   const { t } = useTranslation("common");
   SwiperCore.use([Autoplay]);
-
   return (
     <main className="mt-10">
       <div className="mb-5 text-center text-2xl font-extrabold">
@@ -26,36 +25,13 @@ const NewProducts = () => {
           },
         }}
       >
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
+        {data?.map((product, key) => {
+          return (
+            <SwiperSlide key={key}>
+              <Product data={product} />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </main>
   );

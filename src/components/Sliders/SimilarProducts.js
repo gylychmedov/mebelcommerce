@@ -26,36 +26,13 @@ const SimilarProducts = ({ data }) => {
           },
         }}
       >
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Product />
-        </SwiperSlide>
+        {data?.map((product, key) => {
+          return (
+            <SwiperSlide key={key}>
+              <Product data={product} />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </main>
   );
