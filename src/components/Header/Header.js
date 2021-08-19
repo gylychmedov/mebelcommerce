@@ -10,18 +10,16 @@ const Header = () => {
   const { t } = useTranslation("common");
   return (
     <header>
-      <div className="flex flex-wrap justify-between items-center mt-3">
+      <div className="flex flex-wrap justify-between items-center py-4 border-b">
         <Link href="/">
           <a>
             <img src="/logo.svg" alt="logo" className="w-24" />
           </a>
         </Link>
-        <div className="w-auto">
-          <Search />
-        </div>
-        <aside className="flex mt-3 lg:mt-0 w-full justify-between lg:w-auto">
+
+        <aside className="flex my-3 lg:my-0 w-full justify-between lg:w-auto">
           <Link href={route.asPath} locale={route.locale == "en" ? "fr" : "en"}>
-            <a className="flex lg:flex-col items-center mx-4">
+            <a className="flex lg:flex-col items-center lg:mx-4">
               <div className="mr-1 lg:text-2xl">
                 {/* <BiSupport color="#313131" /> */}
                 <img
@@ -53,6 +51,10 @@ const Header = () => {
             </a>
           </Link>
         </aside>
+
+        <div className="w-full lg:w-4/12">
+          <Search />
+        </div>
       </div>
     </header>
   );
