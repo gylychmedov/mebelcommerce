@@ -17,7 +17,11 @@ const Header = () => {
           </a>
         </Link>
 
-        <aside className="flex my-3 lg:my-0 w-full justify-between lg:w-auto">
+        <div className="lg:w-4/12 lg:order-2 ">
+          <Search />
+        </div>
+
+        <aside className="flex my-3 lg:order-1 lg:my-0 w-full justify-between lg:w-auto">
           <Link href={route.asPath} locale={route.locale == "en" ? "fr" : "en"}>
             <a className="flex lg:flex-col items-center lg:mx-4">
               <div className="mr-1 lg:text-2xl">
@@ -51,10 +55,6 @@ const Header = () => {
             </a>
           </Link>
         </aside>
-
-        <div className="w-full lg:w-4/12">
-          <Search />
-        </div>
       </div>
     </header>
   );

@@ -1,19 +1,23 @@
-import { useContext, useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import View from "../../Layouts/View";
-// import Product from "../../components/Product/Product";
 import Breadcrumb from "../../components/Header/Breadcrumb";
 import SubCategories from "../../components/Categories/Subcategories";
 import useTranslation from "next-translate/useTranslation";
 import { BsFillGridFill, BsFillGrid3X3GapFill } from "react-icons/bs";
 import { ErrorApi } from "../../components/Errors/Errors";
+import { withRouter } from "next/router";
 import { http } from "../../components/API/http";
-import CategoriesContext from "../../components/Contexts/CategoriesContext";
 
 const Categories = (props) => {
   const [grid, setGrid] = useState(2);
   const { t } = useTranslation("common");
-  const categories = useContext(CategoriesContext);
-  console.log(categories);
+  console.log(props);
+
+  useEffect(() => {
+    http
+      .post(`category/${props.slug}/products`)
+      .then((res) => console.log(res));
+  });
   return (
     <View title={t("categories")}>
       {props.error ? (
@@ -21,7 +25,6 @@ const Categories = (props) => {
       ) : (
         <main className="flex flex-col w-full ">
           <Breadcrumb />
-          {categories?.filter((category) => category)}
           <SubCategories />
           <section className="w-full flex items-center rounded-md bg-gray-100 py-3 px-4 my-5">
             {/* grid start */}
@@ -50,38 +53,37 @@ const Categories = (props) => {
             className={`grid ${
               grid == 2 ? "grid-cols-2" : "grid-cols-3"
             } gap-x-4 gap-y-8`}
-          >
-            {/* <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product /> */}
-          </section>
+          ></section>
         </main>
       )}
     </View>
   );
 };
 
-// export const getServerSideProps = async (context) => {
-//   const slug = context.params.slug;
-//   try {
-//     // const categories = await http.post(`category/${slug}/products`);
-//     return {
-//       props: {
-//         error: false,
-//         // categories: categories.data,
-//       },
-//     };
-//   } catch {
-//     return {
-//       props: {
-//         error: true,
-//       },
-//     };
-//   }
-// };
+export const getServerSideProps = async ({ query }) => {
+  try {
+    const slug = query.slug;
+    const products = await http.post(`category/${slug}/products`);
+    return {
+      props: {
+        // pageCount: products.data.meta.last_page,
+        // totalCount: products.data.meta.total,
+        // products: products.data.data.products,
+        // filters: products.data.data.filters,
+        slug: slug,
+        notFound: false,
+      },
+    };
+  } catch {
+    const slug = query.slug;
 
-export default Categories;
+    return {
+      props: {
+        slug: slug,
+        notFound: true,
+      },
+    };
+  }
+};
+
+export default withRouter(Categories);

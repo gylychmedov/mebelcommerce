@@ -2,7 +2,7 @@ import { YMaps, Map, Placemark } from "react-yandex-maps";
 
 const Maps = () => {
   return (
-    <YMaps>
+    <YMaps query={{ lang: "en_US" }}>
       <Map
         width="100%"
         height="600px"
