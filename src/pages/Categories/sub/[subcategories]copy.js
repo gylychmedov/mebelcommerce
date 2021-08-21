@@ -1,40 +1,43 @@
-import { http } from "../../../components/API/http";
-import { useEffect, useState } from "react";
-import { withRouter } from "next/router";
-import { useRouter } from "next/router";
-import useTranslation from "next-translate/useTranslation";
-import Product from "../../../components/Product/Product";
+import { useState, useEffect } from "react";
 import View from "../../../Layouts/View";
+import Product from "../../../components/Product/Product";
 import Breadcrumb from "../../../components/Header/Breadcrumb";
+import useTranslation from "next-translate/useTranslation";
 import { BsFillGridFill, BsFillGrid3X3GapFill } from "react-icons/bs";
+import { useRouter, withRouter } from "next/router";
+import { http } from "../../../components/API/http";
 import { ErrorApi } from "../../../components/Errors/Errors";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownToggle from "react-bootstrap/DropdownToggle";
 import DropdownMenu from "react-bootstrap/DropdownMenu";
-import { motion, AnimatePresence } from "framer-motion";
 
-const SubCategories = (props) => {
-  const route = useRouter();
-  const { t } = useTranslation("common");
+const subCategories = (props) => {
   const [grid, setGrid] = useState(2);
-  const [load, setLoad] = useState(false);
-  const [products, setProducts] = useState(props.products || []);
-  const [totalProduct, setTotalProduct] = useState(props.totalProduct);
+  const { t } = useTranslation("common");
+  const route = useRouter();
+  // const [load, setLoad] = useState(false);
+  const [products, setProducts] = useState({
+    products: props.products,
+    filtered: null,
+  });
+  const [page, setPage] = useState({
+    total: props.pageCount,
+    page: 1,
+    load: false,
+    scrollEnd: false,
+    end: false,
+    postRequest: false,
+  });
 
-  const links = [
-    {
-      name: route.query.subcategories,
-      link: route.asPath,
-    },
-  ];
+  // console.log(products.length);
 
   // scroll states
-  const [scrollEnd, setScrollEnd] = useState(false);
-  const [page, setPage] = useState(props.page || 1);
-  const [ended, setEnded] = useState(false);
-  const [postReq, setPosReq] = useState(false);
-  let loadingMore = false;
-  let totalPage = props.pageCount || 1;
+  // const [scrollEnd, setScrollEnd] = useState(false);
+  // const [page, setPage] = useState(1);
+  // const [ended, setEnded] = useState(false);
+  // const [postReq, setPosReq] = useState(false);
+  // let loadingMore = false;
+  // let totalPage = props.pageCount || 1;
 
   // // filter chekbox
   const [filters, setFilters] = useState({
@@ -46,6 +49,7 @@ const SubCategories = (props) => {
       props.filters && props.filters.categories ? props.filters.categories : [],
   });
   const [filterProducts, setFilterProducts] = useState();
+
   const [allFilters, setAllFilters] = useState({
     sizes: [],
     materials: [],
@@ -70,7 +74,9 @@ const SubCategories = (props) => {
       document.body.scrollHeight - document.scrollingElement.scrollTop <=
       clientScreen
     ) {
-      setScrollEnd(true);
+      if (page.scrollEnd == false) {
+        setPage({ ...page, scrollEnd: true });
+      }
     }
   };
 
@@ -95,11 +101,13 @@ const SubCategories = (props) => {
         )
         .then((res) => {
           if (res.status === 200) {
-            totalPage = res.data.meta.last_page;
-            setTotalProduct(res.data.meta.total);
-            setFilterProducts(res.data.data.products);
-            setLoad(false);
-            setPage(1);
+            setPage({
+              ...page,
+              total: res.data.meta.last_page,
+              load: false,
+              page: 1,
+            });
+            setProducts({ ...products, filtered: res.data.data.products });
             setFilters({
               sizes: res.data.data.filters.sizes,
               colors: res.data.data.filters.colors,
@@ -109,8 +117,11 @@ const SubCategories = (props) => {
           }
         });
     } else {
-      totalPage = props.pageCount || 1;
-      setTotalProduct(props.totalProduct);
+      setPage({
+        ...page,
+        total: props.pageCount || 1,
+        load: false,
+      });
       setFilters({
         sizes: props.filters && props.filters.sizes ? props.filters.sizes : [],
         colors:
@@ -125,7 +136,6 @@ const SubCategories = (props) => {
             : [],
       });
       setFilterProducts();
-      setLoad(false);
     }
   }, [allFilters]);
 
@@ -193,63 +203,69 @@ const SubCategories = (props) => {
     setLoad(!load);
   };
 
-  if (scrollEnd == true) {
-    loadingMore = true;
-    if (postReq == false && page >= totalPage) {
-      setPosReq(true);
-      setEnded(true);
-      setTimeout(() => {
-        setPosReq(false);
-        loadingMore = false;
-      }, 5000);
-    }
-    if (postReq == false && page < totalPage) {
-      setPosReq(true);
-      if (
-        allFilters.sizes.length >= 1 ||
-        allFilters.materials.length >= 1 ||
-        allFilters.colors.length >= 1 ||
-        allFilters.categories.length >= 1
-      ) {
-        http
-          .post(
-            `category/${props.slug}/products?page=${page + 1}`,
-            {
-              materials: allFilters.materials,
-              sizes: allFilters.sizes,
-              categories: allFilters.categories,
-              colors: allFilters.colors,
-            },
-            {}
-          )
-          .then((res) => {
-            if (res.status === 200) {
-              totalPage = res.data.meta.last_page;
-              setTotalProduct(res.data.meta.total);
-              setFilterProducts([...filterProducts, ...res.data.data.products]);
-              setLoad(false);
-              setPage(page + 1);
-            }
-            if (res.data.data.products.length == 0) {
-              setEnded(true);
-            }
-          });
-      } else {
-        http
-          .post(`category/${props.slug}/products?page=${page + 1}`)
-          .then((res) => {
-            setProducts([...products, ...res.data.data.products]);
-            setPage(page + 1);
-          });
-      }
+  // if (page.scrollEnd == true && page.page < page.total) {
+  //   // if (page.page >= page.total) {
+  //   //   setPage({ ...page, load: false, end: true });
+  //   // }
 
-      setTimeout(() => {
-        setPosReq(false);
-        setScrollEnd(false);
-        loadingMore = false;
-      }, 5000);
-    }
-  }
+  //   if (page.postRequest == false) {
+  //     setPage({ ...page, postRequest: true, load: true });
+  //     if (
+  //       allFilters.sizes.length >= 1 ||
+  //       allFilters.materials.length >= 1 ||
+  //       allFilters.colors.length >= 1 ||
+  //       allFilters.categories.length >= 1
+  //     ) {
+  //       http
+  //         .post(
+  //           `category/${props.slug}/products?page=${page + 1}`,
+  //           {
+  //             materials: allFilters.materials,
+  //             sizes: allFilters.sizes,
+  //             categories: allFilters.categories,
+  //             colors: allFilters.colors,
+  //           },
+  //           {}
+  //         )
+  //         .then((res) => {
+  //           if (res.status === 200) {
+  //             setPage({
+  //               ...page,
+  //               total: res.data.meta.last_page,
+  //               load: false,
+  //               scrollEnd: false,
+  //               page: page.page + 1,
+  //             });
+  //             setProducts({
+  //               ...products,
+  //               filtered: [...products.filtered, ...res.data.data.products],
+  //             });
+  //           }
+  //           if (res.data.data.products.length == 0) {
+  //             setPage({ ...page, end: true, scrollEnd: false });
+  //           }
+  //         });
+  //     } else {
+  //       http
+  //         .post(`category/${props.slug}/products?page=${page + 1}`)
+  //         .then((res) => {
+  //           setProducts({
+  //             ...products,
+  //             products: [...products.products, ...res.data.data.products],
+  //           });
+  //           setPage({
+  //             ...page,
+  //             page: page.page + 1,
+  //             load: false,
+  //             scrollEnd: false,
+  //           });
+  //         });
+  //     }
+  //     setTimeout(() => {
+  //       setPage({ ...page, postRequest: false });
+  //     }, 5000);
+  //   }
+  // }
 
   return (
     <View>
@@ -257,7 +273,7 @@ const SubCategories = (props) => {
         <ErrorApi />
       ) : (
         <main className="flex flex-col w-full ">
-          <Breadcrumb data={links} />
+          <Breadcrumb product={route.query.subcategories} />
           <section className="w-full flex items-center rounded-md bg-gray-100 py-2 px-4 my-5">
             {/* grid start */}
             <div className="flex items-center">
@@ -280,52 +296,38 @@ const SubCategories = (props) => {
               </div>
             </div>
             {/* grid end */}
-            <aside className="w-full flex justify-end">
-              <div className="bg-white px-3 py-2 rounded-lg focus:ring-2 lg:hidden">
-                Filters
-              </div>
-              <section className="fixed top-0 left-0 bottom-0 h-screen z-30 w-80 bg-gray-50 shadow-lg flex flex-col">
-                <div className="font-bold px-6 text-white py-3 w-full text-lg bg-indigo-600">
-                  FILTERS
-                </div>
-              </section>
-            </aside>
-            <aside className="w-full space-x-2 justify-end hidden lg:flex">
+
+            <aside className="w-full  flex space-x-2 justify-end">
               {/* colors */}
-              {filters.colors && (
-                <Dropdown>
-                  <DropdownToggle className="bg-white px-3 py-2 rounded-lg focus:ring-2">
-                    Colors
-                  </DropdownToggle>
-                  <DropdownMenu className="z-10">
-                    <div className="bg-white my-1 px-3 py-2 shadow rounded-lg">
-                      {filters.colors.map((color, key) => {
-                        return (
-                          <div key={key}>
-                            <input
-                              type="checkbox"
-                              checked={allFilters.colors.includes(color.id)}
-                              onChange={(event) =>
-                                handleFilterColor(event, color.id)
-                              }
-                              checked={allFilters.colors.includes(color.id)}
-                              id={`color_` + color.id}
-                            />
-                            <label
-                              htmlFor={`color_` + color.id}
-                              className="ml-2"
-                            >
-                              {route.locale == "en"
-                                ? color.name_en
-                                : color.name_fr}
-                            </label>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </DropdownMenu>
-                </Dropdown>
-              )}
+              <Dropdown>
+                <DropdownToggle className="bg-white px-3 py-2 rounded-lg focus:ring-2">
+                  Colors
+                </DropdownToggle>
+                <DropdownMenu className="z-10">
+                  <div className="bg-white my-1 px-3 py-2 shadow rounded-lg">
+                    {filters.colors.map((color, key) => {
+                      return (
+                        <div key={key}>
+                          <input
+                            type="checkbox"
+                            checked={allFilters.colors.includes(color.id)}
+                            onChange={(event) =>
+                              handleFilterColor(event, color.id)
+                            }
+                            checked={allFilters.colors.includes(color.id)}
+                            id={`color_` + color.id}
+                          />
+                          <label htmlFor={`color_` + color.id} className="ml-2">
+                            {route.locale == "en"
+                              ? color.name_en
+                              : color.name_fr}
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </DropdownMenu>
+              </Dropdown>
               {/* sizes */}
               {newSize && (
                 <Dropdown>
@@ -360,91 +362,78 @@ const SubCategories = (props) => {
               )}
 
               {/* material */}
-              {filters.materials && (
-                <Dropdown>
-                  <DropdownToggle className="bg-white px-3 py-2 rounded-lg focus:ring-2">
-                    Material
-                  </DropdownToggle>
-                  <DropdownMenu className="z-10">
-                    <div className="bg-white my-1 px-3 py-2 shadow rounded-lg">
-                      {filters.materials.map((material, key) => {
-                        return (
-                          <div key={key}>
-                            <input
-                              type="checkbox"
-                              checked={allFilters.materials.includes(
-                                material.id
-                              )}
-                              onChange={(event) =>
-                                handleFilterMaterial(event, material.id)
-                              }
-                              checked={allFilters.materials.includes(
-                                material.id
-                              )}
-                              id={`material_` + material.id}
-                            />
-                            <label
-                              htmlFor={`material_` + material.id}
-                              className="ml-2"
-                            >
-                              {route.locale == "en"
-                                ? material.name_en
-                                : material.name_fr}
-                            </label>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </DropdownMenu>
-                </Dropdown>
-              )}
+              <Dropdown>
+                <DropdownToggle className="bg-white px-3 py-2 rounded-lg focus:ring-2">
+                  Material
+                </DropdownToggle>
+                <DropdownMenu className="z-10">
+                  <div className="bg-white my-1 px-3 py-2 shadow rounded-lg">
+                    {filters.materials.map((material, key) => {
+                      return (
+                        <div key={key}>
+                          <input
+                            type="checkbox"
+                            checked={allFilters.materials.includes(material.id)}
+                            onChange={(event) =>
+                              handleFilterMaterial(event, material.id)
+                            }
+                            checked={allFilters.materials.includes(material.id)}
+                            id={`material_` + material.id}
+                          />
+                          <label
+                            htmlFor={`material_` + material.id}
+                            className="ml-2"
+                          >
+                            {route.locale == "en"
+                              ? material.name_en
+                              : material.name_fr}
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </DropdownMenu>
+              </Dropdown>
             </aside>
           </section>
           <section className="w-full flex justify-between">
-            Total product: {totalProduct}
+            Total product: {props.totalCount}
           </section>
           <section
             className={`grid ${
               grid == 2 ? "grid-cols-2" : "grid-cols-3"
             } gap-x-4 gap-y-8`}
           >
-            {filterProducts &&
-              filterProducts.length > 0 &&
-              filterProducts.map((product, key) => {
-                return <Product key={key} data={product} />;
+            {products.filtered &&
+              products.filtered.length > 0 &&
+              products.filtered.map((product) => {
+                return <Product data={product} />;
               })}
 
-            {!filterProducts &&
-              products &&
-              products.map((product, key) => {
-                return <Product key={key} data={product} />;
+            {!products.filtered &&
+              products.products &&
+              products.products.map((product) => {
+                return <Product data={product} />;
               })}
           </section>
-          {!ended && (
-            <div className="text-center font-bold my-3 text-lg">Loading...</div>
-          )}
-          {ended && (
-            <div className="w-full text-center font-bold my-3 text-lg">End</div>
-          )}
+          {page.end && "Ended"}
         </main>
       )}
     </View>
   );
 };
 
-export const getServerSideProps = async (ctx) => {
-  const path = ctx.query.subcategories;
-  const page = ctx.query.page || 1;
+export const getServerSideProps = async ({ query }) => {
   try {
-    const products = await http.post(`category/${path}/products`, {}, {});
+    const slug = query.subcategories;
+    const products = await http.post(`category/${slug}/products`);
     return {
       props: {
         pageCount: products.data.meta.last_page,
-        totalProduct: products.data.meta.total,
+        totalCount: products.data.meta.total,
         products: products.data.data.products,
         filters: products.data.data.filters,
-        slug: path,
-        page: page,
+        slug: slug,
         error: false,
       },
     };
@@ -457,4 +446,4 @@ export const getServerSideProps = async (ctx) => {
   }
 };
 
-export default withRouter(SubCategories);
+export default withRouter(subCategories);

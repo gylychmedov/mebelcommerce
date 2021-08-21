@@ -11,7 +11,11 @@ const Product = ({ data }) => {
         <aside className="col-span-1 hover:shadow-lg flex flex-col relative transform hover:-translate-y-1 duration-1000">
           <img
             className="w-100 hover:scale-105 transform duration-1000 hover:rotate-1"
-            src={data?.images?.[0].image}
+            src={
+              data?.images?.[0]
+                ? data?.images?.[0].image
+                : "/Errors/notImage.png"
+            }
             alt="Product"
           />
           {data.is_new && (
