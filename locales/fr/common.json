@@ -18,11 +18,13 @@
     "color" : "Color FR",
     "material" : "Material FR",
     "size" : "Size FR", 
+    "category" : "Category FR",
     "similarProducts" : "Similar Products FR", 
     "about" : "About FR",
     "contact" : "Contact FR",
     "stories": "Our Stories FR", 
     "corporation": "Corporation FR",
     "relationship" : "Customer Relationship FR",
-    "social" : "Social Media FR"
+    "social" : "Social Media FR",
+    "filters" : "Filters FR"
 }

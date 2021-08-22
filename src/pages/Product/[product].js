@@ -83,13 +83,7 @@ const ProductDetail = ({ error, product }) => {
       ) : (
         <main className="grid grid-cols-12 gap-3 mt-5">
           <section className="col-span-12">
-            <Breadcrumb
-              product={
-                product && route.locale == "en"
-                  ? product.name_en
-                  : product.name_fr
-              }
-            />
+            <Breadcrumb />
           </section>
           <section className="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3">
             <div className="col-span-2 flex flex-col overflow-y-auto max-h-96">

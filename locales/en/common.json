@@ -18,11 +18,13 @@
     "color" : "Color",
     "material" : "Material",
     "size" : "Size", 
+    "category" : "Category",
     "similarProducts" : "Similar Products", 
     "about" : "About",
     "contact" : "Contact",
     "stories": "Our Stories", 
     "corporation": "Corporation",
     "relationship" : "Customer Relationship",
-    "social" : "Social Media"
+    "social" : "Social Media",
+    "filters" : "Filters"
 }

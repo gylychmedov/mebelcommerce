@@ -14,7 +14,7 @@ import DropdownMenu from "react-bootstrap/DropdownMenu";
 import { motion, AnimatePresence } from "framer-motion";
 import { CgClose } from "react-icons/cg";
 
-const SubCategories = (props) => {
+const Search = (props) => {
   const route = useRouter();
   const { t } = useTranslation("common");
   const [grid, setGrid] = useState(2);
@@ -24,7 +24,7 @@ const SubCategories = (props) => {
 
   const links = [
     {
-      name: route.query.subcategories,
+      name: route.query.slug,
       link: route.asPath,
     },
   ];
@@ -561,7 +561,7 @@ const SubCategories = (props) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const path = ctx.query.subcategories;
+  const path = ctx.query.slug;
   const page = ctx.query.page || 1;
   try {
     const products = await http.post(`category/${path}/products`, {}, {});
@@ -585,4 +585,4 @@ export const getServerSideProps = async (ctx) => {
   }
 };
 
-export default withRouter(SubCategories);
+export default withRouter(Search);

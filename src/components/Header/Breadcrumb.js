@@ -8,11 +8,11 @@ const Breadcrumb = ({ data }) => {
       <span className="mx-2 text-gray-400">/</span>
       {data?.map((link, key) => {
         return (
-          <nav key={key}>
+          <nav key={key} className="flex">
             <Link href={link.link || "/"}>
               <a className="text-gray-500">{link.name}</a>
             </Link>
-            <span className="mx-2 lg:mx-4 text-gray-400">/</span>
+            <span className="mx-2 text-gray-400">/</span>
           </nav>
         );
       })}
