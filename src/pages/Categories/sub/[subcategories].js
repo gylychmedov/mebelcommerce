@@ -77,14 +77,14 @@ const SubCategories = (props) => {
   };
 
   // sazlandy
-  useEffect(async () => {
+  useEffect(() => {
     if (
       allFilters.sizes.length >= 1 ||
       allFilters.materials.length >= 1 ||
       allFilters.colors.length >= 1 ||
       allFilters.categories.length >= 1
     ) {
-      await http
+      http
         .post(
           `category/${props.slug}/products`,
           {
@@ -336,7 +336,6 @@ const SubCategories = (props) => {
                                 onChange={(event) =>
                                   handleFilterSize(event, size.id)
                                 }
-                                checked={allFilters.sizes.includes(size.id)}
                                 id={`size_` + size.id}
                               />
                               {route.locale == "en"
@@ -367,7 +366,6 @@ const SubCategories = (props) => {
                                 onChange={(event) =>
                                   handleFilterColor(event, color.id)
                                 }
-                                checked={allFilters.colors.includes(color.id)}
                                 id={`color_` + color.id}
                               />
                               {route.locale == "en"
@@ -401,9 +399,6 @@ const SubCategories = (props) => {
                                 onChange={(event) =>
                                   handleFilterMaterial(event, material.id)
                                 }
-                                checked={allFilters.materials.includes(
-                                  material.id
-                                )}
                                 id={`material_` + material.id}
                               />
                               {route.locale == "en"
@@ -436,7 +431,6 @@ const SubCategories = (props) => {
                               onChange={(event) =>
                                 handleFilterColor(event, color.id)
                               }
-                              checked={allFilters.colors.includes(color.id)}
                               id={`color_` + color.id}
                             />
                             <label
@@ -471,7 +465,6 @@ const SubCategories = (props) => {
                               onChange={(event) =>
                                 handleFilterSize(event, size.id)
                               }
-                              checked={allFilters.sizes.includes(size.id)}
                               id={`size_` + size.id}
                             />
                             <label htmlFor={`size_` + size.id} className="ml-2">
@@ -506,9 +499,6 @@ const SubCategories = (props) => {
                               onChange={(event) =>
                                 handleFilterMaterial(event, material.id)
                               }
-                              checked={allFilters.materials.includes(
-                                material.id
-                              )}
                               id={`material_` + material.id}
                             />
                             <label

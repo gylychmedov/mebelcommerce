@@ -68,9 +68,9 @@ const MobileSidebar = () => {
                         >
                           {category.categories &&
                             category.categories.length > 0 &&
-                            category.categories.map((subcategory) => {
+                            category.categories.map((subcategory, key) => {
                               return (
-                                <Link href="">
+                                <Link href="/" passHref key={key}>
                                   <motion.a
                                     className="ml-5"
                                     initial={{ y: 10, opacity: 0 }}
