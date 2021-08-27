@@ -22,14 +22,12 @@ const SubCategories = (props) => {
       .then((res) => setProducts(res.data.data));
   }, []);
 
-  console.log(products);
-
   return (
     <View>
       <main className="flex flex-col w-full ">
         {/* <Breadcrumb data={links} /> */}
         <section className="w-full flex justify-between">
-          Total product: {products?.length}
+          {t("total_product")}: {products?.length}
         </section>
         <section className={`grid grid-cols-3 gap-3`}>
           {products &&

@@ -1,20 +1,21 @@
-import { http } from "../../../components/API/http";
+import { http } from "../../components/API/http";
 import { useEffect, useState } from "react";
 import { withRouter } from "next/router";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-import Product from "../../../components/Product/Product";
-import View from "../../../Layouts/View";
-import Breadcrumb from "../../../components/Header/Breadcrumb";
+import Product from "../../components/Product/Product";
+import View from "../../Layouts/View";
+import Breadcrumb from "../../components/Header/Breadcrumb";
 import { BsFillGridFill, BsFillGrid3X3GapFill } from "react-icons/bs";
-import { ErrorApi } from "../../../components/Errors/Errors";
+import { ErrorApi } from "../../components/Errors/Errors";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownToggle from "react-bootstrap/DropdownToggle";
 import DropdownMenu from "react-bootstrap/DropdownMenu";
 import { motion, AnimatePresence } from "framer-motion";
 import { CgClose } from "react-icons/cg";
+import SubCategories from "../../components/Categories/Subcategories";
 
-const SubCategories = (props) => {
+const Categories = (props) => {
   const route = useRouter();
   const { t } = useTranslation("common");
   const [grid, setGrid] = useState(2);
@@ -24,7 +25,7 @@ const SubCategories = (props) => {
 
   const links = [
     {
-      name: route.query.subcategories,
+      name: route.query.categories,
       link: route.asPath,
     },
   ];
@@ -260,6 +261,7 @@ const SubCategories = (props) => {
       ) : (
         <main className="flex flex-col w-full ">
           <Breadcrumb data={links} />
+          <SubCategories data={props.subcategories} />
           <section className="w-full flex items-center rounded-md bg-gray-100 py-2 px-4 my-5">
             {/* grid start */}
             <div className="flex items-center">
@@ -551,7 +553,7 @@ const SubCategories = (props) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const path = ctx.query.subcategories;
+  const path = ctx.query.categories;
   const page = ctx.query.page || 1;
   try {
     const products = await http.post(`category/${path}/products`, {}, {});
@@ -560,6 +562,7 @@ export const getServerSideProps = async (ctx) => {
         pageCount: products.data.meta.last_page,
         totalProduct: products.data.meta.total,
         products: products.data.data.products,
+        subcategories: products.data.data.categories,
         filters: products.data.data.filters,
         slug: path,
         page: page,
@@ -575,4 +578,4 @@ export const getServerSideProps = async (ctx) => {
   }
 };
 
-export default withRouter(SubCategories);
+export default withRouter(Categories);

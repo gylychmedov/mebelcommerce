@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SubCategory from "./SubCategory";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
-const SubCategories = () => {
+const SubCategories = ({ data }) => {
   SwiperCore.use([Navigation]);
   const nextSlide = useRef(null);
   const prevSlide = useRef(null);
@@ -38,36 +38,14 @@ const SubCategories = () => {
         >
           <GrFormNext size={24} />
         </div>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SubCategory />
-        </SwiperSlide>
+        {data &&
+          data.map((subcategory, key) => {
+            return (
+              <SwiperSlide key={key}>
+                <SubCategory data={subcategory} />
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </main>
   );

@@ -10,8 +10,6 @@ import { ErrorApi } from "../../components/Errors/Errors";
 import { http } from "../../components/API/http";
 
 const ProductDetail = ({ error, product }) => {
-  console.log(product);
-
   const route = useRouter();
   const { t } = useTranslation("common");
   const [mainImage, setMainImage] = useState("");
