@@ -25,7 +25,7 @@ const Search = () => {
             className={`border px-4 py-2 rounded-l w-full hidden lg:block`}
           />
           {search ? (
-            <Link href={`/Search/${search}`}>
+            <Link href={`/search/${search}`}>
               <a className="lg:hidden bg-indigo-600 px-4 py-2 rounded-l lg:rounded-l-none flex justify-center items-center rounded-r">
                 <IoSearchOutline size="20" color="#fff" />
               </a>
@@ -44,7 +44,7 @@ const Search = () => {
           )}
 
           <Link
-            href={`/Search/${search ? (search.length > 0 ? search : "") : ""}`}
+            href={`/search/${search ? (search.length > 0 ? search : "") : ""}`}
           >
             <a
               // onClick={() => handleShow()}

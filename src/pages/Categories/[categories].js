@@ -13,7 +13,7 @@ import DropdownToggle from "react-bootstrap/DropdownToggle";
 import DropdownMenu from "react-bootstrap/DropdownMenu";
 import { motion, AnimatePresence } from "framer-motion";
 import { CgClose } from "react-icons/cg";
-import SubCategories from "../../components/Categories/Subcategories";
+import SubCategories from "../../components/categories/Subcategories";
 
 const Categories = (props) => {
   const route = useRouter();
@@ -520,7 +520,7 @@ const Categories = (props) => {
               )}
             </aside>
           </section>
-          <section className="w-full flex justify-between mb-3">
+          <section className="w-full flex justify-between mb-4 font-bold text-gray-500">
             {t("total_product")}: {totalProduct}
           </section>
           <section

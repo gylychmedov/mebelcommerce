@@ -9,7 +9,7 @@ import LNG from "./LNG";
 const Header = () => {
   const { t } = useTranslation("common");
   return (
-    <header>
+    <header className="px-2 lg:px-16 xl:px-56 z-10">
       <div className="flex flex-wrap justify-between items-center py-4 border-b">
         <div className="flex">
           <MobileSidebar />
@@ -19,6 +19,7 @@ const Header = () => {
             <img src="/logo.svg" alt="logo" className="w-28" />
           </a>
         </Link>
+        <div className="lg:hidden"></div>
 
         <Search />
         <div className="lg:order-3">
@@ -29,9 +30,9 @@ const Header = () => {
             <div className="mr-1 lg:text-2xl">
               <BiSupport color="#313131" />
             </div>
-            <span>8 62 81-87-25 </span>
+            <a href="tel:+99362818725">8 62 81-87-25 </a>
           </div>
-          <Link href="/Stories">
+          <Link href="/stories">
             <a className="flex lg:flex-col items-center">
               <div className="mr-1 lg:text-2xl">
                 <ImLocation2 color="#313131" />

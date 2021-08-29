@@ -32,7 +32,7 @@ const Contact = ({ data }) => {
           </a>
         )}
         {data.address_en && (
-          <Link href="/Stories">
+          <Link href="/stories">
             <a className="font-bold text-xl text-indigo-700 rounded-lg hover:bg-indigo-200 hover:text-indigo-900 duration-700 transform hover:scale-105 bg-indigo-50 flex justify-center items-center flex-col py-16 col-span-12 sm:col-span-6 lg:col-span-4">
               <IoStorefrontOutline size={56} />
               <div className="font-normal  mt-4 text-center">

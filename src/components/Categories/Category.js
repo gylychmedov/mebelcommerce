@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 const Category = ({ data }) => {
   const route = useRouter();
   return (
-    <Link href={`/Categories/${data.slug}`}>
+    <Link href={`/categories/${data.slug}`}>
       <a className="relative col-span-12 sm:col-span-6 lg:col-span-4 group">
         <div className="w-full h-full overflow-hidden rounded-md ">
           <img

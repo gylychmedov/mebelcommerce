@@ -6,7 +6,7 @@ const Product = ({ data }) => {
   const route = useRouter();
   const { t } = useTranslation("common");
   return (
-    <Link href={"/Product/" + data.slug || "/"}>
+    <Link href={"/product/" + data.slug || "/"}>
       <a>
         <aside className="col-span-1 hover:shadow-lg flex flex-col relative transform hover:-translate-y-1 duration-1000">
           <img

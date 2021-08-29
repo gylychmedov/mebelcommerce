@@ -4,7 +4,11 @@ import { HiOutlineHome } from "react-icons/hi";
 const Breadcrumb = ({ data }) => {
   return (
     <nav className="flex items-center  px-5 py-2">
-      <HiOutlineHome />
+      <Link href="/">
+        <a>
+          <HiOutlineHome />
+        </a>
+      </Link>
       {data?.map((link, key) => {
         return (
           <nav key={key} className="flex justify-start">

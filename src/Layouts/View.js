@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
-import { createContext } from "react";
 
 const View = (props) => {
   const { children, title } = props;
@@ -10,10 +9,9 @@ const View = (props) => {
       <Head>
         <title>{title && `${title} | `} Ider mebel site</title>
       </Head>
-      <main className="px-2 lg:px-16 xl:px-56">
-        <Navbar />
-        {children}
-      </main>
+      <Navbar />
+
+      <main className="px-2 lg:px-16 xl:px-56">{children}</main>
       <Footer />
     </>
   );

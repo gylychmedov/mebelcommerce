@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import "../styles/swiper-bundle.css";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { CategoriesProvider } from "../components/Contexts/CategoriesContext";
+import { CategoriesProvider } from "../components/Contexts/categoriesContext";
 import { useEffect, useState } from "react";
 import { http } from "../components/API/http";
 

@@ -1,4 +1,4 @@
-import Categories from "../Header/Categories";
+import Categories from "../Header/categories";
 import Header from "../Header/Header";
 
 const Navbar = () => {

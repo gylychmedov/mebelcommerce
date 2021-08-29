@@ -7,45 +7,47 @@ import {
   RiInstagramLine,
   RiYoutubeLine,
 } from "react-icons/ri";
+import { useContext } from "react";
+import CategoriesContext from "../Contexts/categoriesContext";
+import { useRouter } from "next/router";
 
 const Footer = () => {
+  const categories = useContext(CategoriesContext);
   const { t } = useTranslation("common");
+  const route = useRouter();
+
   return (
     <footer className="mt-8 py-8 px-3 xl:px-56 bg-gray-100 grid grid-cols-12 gap-2">
       <aside className="col-span-12 sm:col-span-6 lg:col-span-3 mt-4 lg:mt-0 flex flex-col">
         <div className="font-bold text-gray-800 uppercase mb-2">
           {t("categories")}
         </div>
-        <Link href="/">
-          <a>Bed room</a>
-        </Link>
-
-        <Link href="/">
-          <a>Dining room</a>
-        </Link>
-
-        <Link href="/">
-          <a>TV units</a>
-        </Link>
-
-        <Link href="/">
-          <a>Set stol</a>
-        </Link>
+        {categories &&
+          categories.length > 0 &&
+          categories.map((category, key) => {
+            return (
+              <Link href={`/categories/${category.slug}`} key={key}>
+                <a>
+                  {route.locale == "en" ? category.title_en : category.title_fr}
+                </a>
+              </Link>
+            );
+          })}
       </aside>
 
       <aside className="col-span-12 sm:col-span-6 lg:col-span-3 mt-4 lg:mt-0 flex flex-col">
         <div className="font-bold text-gray-800 uppercase mb-2">
           {t("corporation")}
         </div>
-        <Link href="/About">
+        <Link href="/about">
           <a>{t("about")}</a>
         </Link>
 
-        <Link href="/Stories">
+        <Link href="/stories">
           <a>{t("stories")}</a>
         </Link>
 
-        <Link href="/Contact">
+        <Link href="/contact">
           <a>{t("contact")}</a>
         </Link>
       </aside>

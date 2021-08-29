@@ -1,5 +1,5 @@
 import { http } from "../components/API/http";
-import CategoryList from "../components/Categories/CategoryList";
+import CategoryList from "../components/categories/CategoryList";
 import { ErrorApi } from "../components/Errors/Errors";
 import NewProducts from "../components/Sliders/NewProducts";
 import HomeSlider from "../components/Sliders/HomeSlider";

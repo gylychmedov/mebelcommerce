@@ -1,7 +1,7 @@
 import { FiMenu } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useState } from "react";
-import CategoriesContext from "../Contexts/CategoriesContext";
+import CategoriesContext from "../Contexts/categoriesContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { IoMdClose } from "react-icons/io";

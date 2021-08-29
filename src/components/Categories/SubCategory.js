@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 const SubCategory = ({ data }) => {
   const route = useRouter();
   return (
-    <Link href={`/Categories/sub/${data.slug}`}>
+    <Link href={`/categories/sub/${data.slug}`}>
       <a>
         <div className="relative transform duration-500 hover:-translate-y-1 my-5 rounded-md">
           <img

@@ -26,7 +26,7 @@ const SubCategories = (props) => {
     <View>
       <main className="flex flex-col w-full ">
         {/* <Breadcrumb data={links} /> */}
-        <section className="w-full flex justify-between">
+        <section className="w-full flex justify-between mb-4 font-bold text-gray-500">
           {t("total_product")}: {products?.length}
         </section>
         <section className={`grid grid-cols-3 gap-3`}>

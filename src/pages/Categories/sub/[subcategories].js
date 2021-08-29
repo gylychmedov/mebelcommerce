@@ -518,7 +518,7 @@ const SubCategories = (props) => {
               )}
             </aside>
           </section>
-          <section className="w-full flex justify-between mb-3">
+          <section className="w-full flex justify-between mb-4 text-gray-500 font-bold">
             {t("total_product")}: {totalProduct}
           </section>
           <section
