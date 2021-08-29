@@ -10,6 +10,7 @@ import { ErrorApi } from "../../components/Errors/Errors";
 import { http } from "../../components/API/http";
 
 const ProductDetail = ({ error, product }) => {
+  console.log(product);
   const route = useRouter();
   const { t } = useTranslation("common");
   const [mainImage, setMainImage] = useState("");
@@ -74,6 +75,12 @@ const ProductDetail = ({ error, product }) => {
     }
   }
 
+  const links = [
+    {
+      name: route.locale == "en" ? product.name_en : product.name_fr,
+      link: product.slug,
+    },
+  ];
   return (
     <View title={route.locale == "en" ? product.name_en : product.name_fr}>
       {error ? (
@@ -81,7 +88,7 @@ const ProductDetail = ({ error, product }) => {
       ) : (
         <main className="grid grid-cols-12 gap-3 mt-5">
           <section className="col-span-12">
-            <Breadcrumb />
+            <Breadcrumb data={links} />
           </section>
           <section className="col-span-12 lg:col-span-7 grid grid-cols-12 gap-3">
             <div className="col-span-2 flex flex-col overflow-y-auto max-h-96">
@@ -111,7 +118,7 @@ const ProductDetail = ({ error, product }) => {
                 />
                 <div
                   id="myresult"
-                  className={"img-zoom-result absolute top-0"}
+                  className={"img-zoom-result absolute top-0 hidden lg:block"}
                   style={{ left: "102%" }}
                 ></div>
               </div>
@@ -163,7 +170,7 @@ const ProductDetail = ({ error, product }) => {
               </div>
             )}
 
-            {product.include && product.include.length > 0 && (
+            {product.included && product.included.length > 0 && (
               <div className="flex flex-col my-2 pt-4 border-t">
                 <h3 className="font-bold">{t("setContent")}</h3>
                 <table className="table-fixed text-left">
@@ -172,21 +179,32 @@ const ProductDetail = ({ error, product }) => {
                       <th className="w-3/12">{t("name")}</th>
                       <th className="w-5/12">{t("description")}</th>
                       <th className="w-2/12">{t("total")}</th>
+                      <th className="w-2/12">{t("size")}</th>
                       <th className="w-2/12">{t("price")}</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {product.include.map((include, key) => {
+                    {product.included.map((include, key) => {
                       return (
                         <tr className="border-t border-gray-100" key={key}>
-                          <td>{include.name}</td>
-                          <td className="text-sm">{include.description}</td>
+                          <td>
+                            {route.locale == "en"
+                              ? include.name_en
+                              : include.name_fr}
+                          </td>
+                          <td className="text-sm">
+                            {route.locale == "en"
+                              ? include.description_en
+                              : include.description_fr}
+                          </td>
                           <td>
                             <span className="flex items-center">
                               <AiOutlineInbox className="mr-1" />{" "}
                               {include.count}
                             </span>
                           </td>
+                          <td className="text-sm">{include.size}</td>
+
                           <td>${include.price}</td>
                         </tr>
                       );
@@ -267,4 +285,5 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 };
+
 export default ProductDetail;
