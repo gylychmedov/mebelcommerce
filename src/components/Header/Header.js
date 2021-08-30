@@ -11,20 +11,22 @@ const Header = () => {
   return (
     <header className="px-2 lg:px-16 xl:px-56 z-10">
       <div className="flex flex-wrap justify-between items-center py-4 border-b">
-        <div className="flex">
+        <div className="flex order-1 lg:order-none">
           <MobileSidebar />
         </div>
         <Link href="/">
-          <a className="lg:order-1">
+          <a className="order-2 lg:order-1">
             <img src="/logo.svg" alt="logo" className="w-28" />
           </a>
         </Link>
-        <div className="lg:hidden"></div>
-
-        <Search />
-        <div className="lg:order-3">
+        <div className="order-3">
           <LNG />
         </div>
+
+        <div className="order-5 lg:order-3  w-full lg:w-4/12">
+          <Search />
+        </div>
+
         <aside className="flex my-3 lg:order-2 lg:my-0 w-full justify-between lg:w-auto">
           <div className="flex lg:flex-col items-center mx-4">
             <div className="mr-1 lg:text-2xl">

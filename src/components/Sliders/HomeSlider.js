@@ -45,7 +45,7 @@ const HomeSlider = ({ data }) => {
                       <img
                         src={slide.image}
                         alt="slider"
-                        className="w-full rounded-lg"
+                        className="w-full h-96 object-cover rounded-lg"
                       />
                     </a>
                   </Link>
@@ -53,7 +53,7 @@ const HomeSlider = ({ data }) => {
                   <img
                     src={slide.image}
                     alt="slider"
-                    className="w-full rounded-lg"
+                    className="w-full h-96 object-cover rounded-lg"
                   />
                 )}
               </SwiperSlide>

@@ -10,8 +10,8 @@ const Categories = () => {
 
   return (
     <>
-      <aside className="navbar shadow">
-        <nav className="px-2 lg:px-16 xl:px-56 z-30">
+      <aside className="navbar shadow ">
+        <nav className="px-2 lg:px-16 xl:px-56 z-30 max-w-full overflow-x-auto">
           {categories &&
             categories.map((cat) => {
               return (

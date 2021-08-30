@@ -7,7 +7,7 @@ const View = (props) => {
   return (
     <>
       <Head>
-        <title>{title && `${title} | `} Ider mebel site</title>
+        <title>{title && `${title} | `} MozaikDeco</title>
       </Head>
       <Navbar />
 

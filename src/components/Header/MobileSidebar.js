@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { IoMdClose } from "react-icons/io";
 import useTranslation from "next-translate/useTranslation";
+import { BiChevronRight } from "react-icons/bi";
 
 const MobileSidebar = () => {
   const categories = useContext(CategoriesContext);
@@ -42,20 +43,45 @@ const MobileSidebar = () => {
               <div className="p-2" onClick={() => setIsOpen(!isOpen)}>
                 <IoMdClose size={22} />
               </div>
-              <div className="ml-8">{t("categories")}</div>
             </aside>
             {categories &&
               categories.map((category, index) => {
                 return (
                   <div key={index} className="w-full my-1 ">
-                    <div
-                      onClick={() => setCategoryIndex(index)}
-                      className="hover:text-white duration-500 hover:bg-indigo-600 px-5 py-3 font-bold cursor-pointer"
-                    >
-                      {route.locale == "en"
-                        ? category.title_en
-                        : category.title_fr}
-                    </div>
+                    {category.categories && category.categories.length > 0 ? (
+                      <div
+                        onClick={() => {
+                          if (categoryIndex !== index) {
+                            setCategoryIndex(index);
+                          } else {
+                            setCategoryIndex();
+                          }
+                        }}
+                        className="hover:text-white duration-500 flex justify-between items-center hover:bg-indigo-600 px-5 py-3 font-bold cursor-pointer"
+                      >
+                        {route.locale == "en"
+                          ? category.title_en
+                          : category.title_fr}
+                        {category.categories && category.categories.length > 0 && (
+                          <motion.div
+                            initial={{ rotate: 0 }}
+                            animate={{
+                              rotate: categoryIndex == index ? 90 : 0,
+                            }}
+                          >
+                            <BiChevronRight />
+                          </motion.div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link href={`/categories/${category.slug}`}>
+                        <a className="hover:text-white duration-500 flex justify-between items-center hover:bg-indigo-600 px-5 py-3 font-bold cursor-pointer">
+                          {route.locale == "en"
+                            ? category.title_en
+                            : category.title_fr}
+                        </a>
+                      </Link>
+                    )}
                     <AnimatePresence>
                       {categoryIndex == index && (
                         <motion.section
@@ -70,7 +96,11 @@ const MobileSidebar = () => {
                             category.categories.length > 0 &&
                             category.categories.map((subcategory, key) => {
                               return (
-                                <Link href="/" passHref key={key}>
+                                <Link
+                                  href={`/categories/sub/${subcategory.slug}`}
+                                  passHref
+                                  key={key}
+                                >
                                   <motion.a
                                     className="ml-5"
                                     initial={{ y: 10, opacity: 0 }}
