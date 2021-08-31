@@ -9,7 +9,7 @@ const HomeSlider = ({ data }) => {
   const prevSlide = useRef(null);
   SwiperCore.use([Autoplay, Navigation, Pagination]);
   return (
-    <section>
+    <section className="mt-2">
       {data && (
         <Swiper
           autoplay={{ delay: 3000 }}
